@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.Models.Registration;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,11 +12,10 @@ namespace ServiceLayer.Controllers
     [Route("api/[controller]")]
     public class RegistrationController : Controller
     {
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        public IRegistrationRepository Registration { get; set; }
+        public RegistrationController(IRegistrationRepository registration)
         {
-            return new string[] { "value1", "value2" };
+            Registration = registration;
         }
 
         // GET api/values/5
@@ -27,13 +27,7 @@ namespace ServiceLayer.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Register([FromBody]string value)
         {
         }
 
