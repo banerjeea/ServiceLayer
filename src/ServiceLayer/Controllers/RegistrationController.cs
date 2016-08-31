@@ -27,8 +27,16 @@ namespace ServiceLayer.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Register([FromBody]string value)
+        public async Task<ActionResult> Register([FromBody] Registration item)
         {
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            
+            Registration.Add(item);
+            return CreatedAtRoute("GetProfile", new { id = item.RegistrationNumber }, item);
         }
 
         // DELETE api/values/5
